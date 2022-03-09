@@ -1,4 +1,5 @@
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { EMPTY } from 'rxjs';
 import { Usuario } from 'src/app/core/models/usuario';
 import { UsuarioService } from 'src/app/core/services/usuario.service';
@@ -10,28 +11,34 @@ import { UsuarioService } from 'src/app/core/services/usuario.service';
 })
 export class LoginComponent implements OnInit {
 
+  public form!: FormGroup;
+
   @Input() titulo : String;
-
   @Output() toggle: EventEmitter<string> = new EventEmitter(); // Test comunic
-
 
   nro: number = 3;
   resp: any = {};
   usu: Usuario = new Usuario();
   
-  inputCUIL : any;
-  inputPass: string = '';
+  //inputCUIL : any;
+  //inputPass: string = '';
 
-  constructor(private _service: UsuarioService) {
+  constructor(private _service: UsuarioService,
+              private formBuilder: FormBuilder) {
 
     this.titulo = '';
   }
 
+  ngOnInit(): void {
+    this.form = this.formBuilder.group({
+      inputCUIL: [''],
+      inputPass: ['']
+    });
+  }
   
   submit(): void{
     
-    
-    this._service.logueoUsuario(this.inputCUIL, this.inputPass).subscribe(respuesta =>{
+    this._service.logueoUsuario(this.form.value.inputCUIL, this.form.value.inputPass).subscribe(respuesta =>{
         
         if(respuesta.cuil){
         this.toggle.emit(respuesta.nombre);
@@ -40,13 +47,10 @@ export class LoginComponent implements OnInit {
           console.log("no trajo usuario");
         }
   
-    }, error =>{
+    }, error =>{ 
       console.log("error: " + error);
     })
     
-  }
-  
-  ngOnInit(): void {
   }
   
 } 
