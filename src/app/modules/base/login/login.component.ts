@@ -2,6 +2,7 @@ import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@a
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { EMPTY } from 'rxjs';
 import { Usuario } from 'src/app/core/models/usuario';
+import { AlertaService } from 'src/app/core/services/alerta.service';
 import { UsuarioService } from 'src/app/core/services/usuario.service';
 
 @Component({
@@ -23,8 +24,9 @@ export class LoginComponent implements OnInit {
   //inputCUIL : any;
   //inputPass: string = '';
 
-  constructor(private _service: UsuarioService,
-              private formBuilder: FormBuilder) {
+  constructor(private _usuarioService: UsuarioService,
+              private formBuilder: FormBuilder,
+              private _alertaService: AlertaService) {
 
     this.titulo = '';
   }
@@ -38,10 +40,11 @@ export class LoginComponent implements OnInit {
   
   submit(): void{
     
-    this._service.logueoUsuario(this.form.value.inputCUIL, this.form.value.inputPass).subscribe(respuesta =>{
+    this._usuarioService.logueoUsuario(this.form.value.inputCUIL, this.form.value.inputPass).subscribe(respuesta =>{
         
         if(respuesta.cuil){
         this.toggle.emit(respuesta.nombre);
+        this._alertaService.success("Confirmación","Se ingresó al sistema");
         }
         else{
           console.log("no trajo usuario");
@@ -58,7 +61,7 @@ export class LoginComponent implements OnInit {
 
 
 /*
-    this._service.testDeGetUsuario(this.inputCUIL).subscribe(respuesta =>{
+    this._usuarioService.testDeGetUsuario(this.inputCUIL).subscribe(respuesta =>{
       
       respuesta.forEach(x => {
         this.usu = x;

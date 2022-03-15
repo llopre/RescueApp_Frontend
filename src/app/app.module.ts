@@ -8,13 +8,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './modules/base/login/login.component';
 import { NavbarComponent } from './modules/base/navbar/navbar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HomeComponent } from './modules/home/home.component';
+import { RouterModule } from '@angular/router';
+import { RegistrarComponent } from './modules/base/registrar/registrar.component';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    NavbarComponent
+    NavbarComponent,
+    HomeComponent,
+    RegistrarComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +28,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ResourceModule.forRoot(),
     AppRoutingModule,
     FormsModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

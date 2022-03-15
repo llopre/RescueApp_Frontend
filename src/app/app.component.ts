@@ -6,13 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Frontend';
-  usuarioApp : any;
-
-  nombreUsuario = "";
-
-  ApretoBoton(nombre : string) {
-    this.nombreUsuario = nombre;
-  }
+ 
 }
 

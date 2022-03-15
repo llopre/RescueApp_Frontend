@@ -1,7 +1,9 @@
-<form [formGroup]="form"  class="card mb-1 text-white bg-secondary" style="max-width: 18rem; margin-left:35%; margin-top: 5%;">
-    <div class="card-header">
+<legend class="text-center mt-3 mb-4 text-secondary" ><h2>{{titulo}}</h2></legend>
+<form [formGroup]="form"  class="card mb-1 text-white bg-secondary" style="max-width: 22rem; margin-left:35%; margin-top: 5%;">
+    <!--<div class="card-header">
     <legend class="text-center" >{{titulo}}</legend>
     </div>
+     -->
     <div class="form-group card-body" style="margin-top:10%;" >
       <input formControlName = "inputCUIL" name= "nCuil"  class="form-control form-control-lg col-md-15" id="idCuil" placeholder="CUIL">
       <small class="form-text  text-white">Solo números</small>
@@ -14,7 +16,7 @@
     <button type="button" (click)="submit()" class="form-control btn btn-primary">Entrar</button>
     </div>
     <div class="form-group col-md-12">
-    <button type="button"  class="form-control btn btn-primary" >Registrarse</button>
+    <button [routerLink]="['registrar']" type="button"  class="form-control btn btn-primary" >Registrarse</button>
     </div>
-    </div>
+    </div> 
   </form>
